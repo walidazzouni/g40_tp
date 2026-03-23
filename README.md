@@ -27,7 +27,7 @@ En résumé, ce programme constitue un serveur local simple permettant de recevo
 
 # 2) Explication des fonctions utilisées
 
-🔹 Fonctions du programme client
+a) Fonctions du programme client
 socket.socket()
 Permet de créer un socket réseau. En l’absence de paramètres, il s’agit par défaut d’un socket utilisant le protocole TCP.
 sock.connect((hôte, port))
@@ -40,7 +40,7 @@ print(...)
 Affiche les données reçues à l’écran.
 connect_to_google()
 Fonction définie par le programmeur permettant de regrouper les différentes étapes de la communication client.
-🔹 Fonctions du programme serveur
+b) Fonctions du programme serveur
 socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 Crée un socket réseau :
 AF_INET : utilisation du protocole IPv4
