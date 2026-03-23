@@ -1,5 +1,6 @@
 # g40_tp
 Application de chat
+
 1) Analyse des programmes client / serveur
 Programme 1 : Client socket
 
@@ -96,4 +97,11 @@ while True
 Boucle infinie pour que le serveur continue à écouter.
 
 3) Les programmes de client serveur avec des classes sont mit en piéce jointe.
+
+
+Chat entre deux clients 
+
+1) Dans le cas d’une communication entre plusieurs clients, il est nécessaire de modifier le serveur afin qu’il assure une fonction de routage. Pour cela, le serveur doit maintenir une structure de données contenant les différents clients connectés ainsi que leurs identifiants respectifs. Lorsqu’un message est reçu, il doit analyser le destinataire visé puis retransmettre le message uniquement au client concerné. Cette approche permet à un client A d’échanger avec un client B de manière ciblée, tout en conservant une architecture centralisée.
+  
+3) Cette architecture présente plusieurs limites. Tout d’abord, le serveur constitue un point central dont dépend l’ensemble des communications : toute panne ou indisponibilité du serveur interrompt les échanges. Ensuite, lorsque le nombre de clients augmente, la charge du serveur devient plus importante, ce qui peut dégrader les performances globales. De plus, le transit systématique des messages par le serveur ajoute un délai supplémentaire et augmente la complexité de gestion des connexions, des identifiants et du routage. Enfin, cette centralisation soulève également des questions de sécurité et de confidentialité des échanges.
  
