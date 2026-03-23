@@ -74,4 +74,14 @@ Met en place une boucle infinie afin de permettre au serveur de fonctionner en c
 1) Dans le cas d’une communication entre plusieurs clients, il est nécessaire de modifier le serveur afin qu’il assure une fonction de routage. Pour cela, le serveur doit maintenir une structure de données contenant les différents clients connectés ainsi que leurs identifiants respectifs. Lorsqu’un message est reçu, il doit analyser le destinataire visé puis retransmettre le message uniquement au client concerné. Cette approche permet à un client A d’échanger avec un client B de manière ciblée, tout en conservant une architecture centralisée.
   
 3) Cette architecture présente plusieurs limites. Tout d’abord, le serveur constitue un point central dont dépend l’ensemble des communications : toute panne ou indisponibilité du serveur interrompt les échanges. Ensuite, lorsque le nombre de clients augmente, la charge du serveur devient plus importante, ce qui peut dégrader les performances globales. De plus, le transit systématique des messages par le serveur ajoute un délai supplémentaire et augmente la complexité de gestion des connexions, des identifiants et du routage. Enfin, cette centralisation soulève également des questions de sécurité et de confidentialité des échanges.
- 
+
+ ## Encoding
+
+ L’objectif de cet exercice est de construire un tableau résultat dans lequel chaque élément correspond au produit de tous les autres éléments du tableau d’entrée, à l’exception de celui situé à la même position.
+
+La solution proposée repose sur l’utilisation de deux boucles imbriquées. Pour chaque indice du tableau, on calcule le produit de tous les éléments sauf celui de l’indice courant. Ce résultat est ensuite ajouté dans un nouveau tableau.
+
+Cette approche respecte la contrainte de l’exercice, qui interdit l’utilisation de la division.
+
+
+
