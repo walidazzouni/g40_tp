@@ -1,8 +1,5 @@
 # Corrigé — Examen G40 Python 2025
 
-## Source
-
-Corrigé rédigé à partir du sujet **Examen G40 Python 2025**.
 
 ---
 
