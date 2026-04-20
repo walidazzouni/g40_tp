@@ -12,25 +12,25 @@ Corrigé rédigé à partir du sujet **Examen G40 Python 2025**.
 
 ### a. Le langage python est un langage
 
-* ✅ **Interprété**
+* **Interprété**
 
 ### b. Un script écrit en python
 
-* ✅ **Peut tourner sur n’importe quelle machine grâce à la machine virtuelle**
+* **Peut tourner sur n’importe quelle machine grâce à la machine virtuelle**
 
 > Réponse attendue dans l’esprit du cours : le code Python s’exécute via l’interpréteur / machine virtuelle Python disponible sur la machine cible.
 
 ### c. PiP est un programme qui permet
 
-* ✅ **D’installer et de supprimer des libraries python sur une machine**
+* **D’installer et de supprimer des libraries python sur une machine**
 
 ### d. Python dans sa version 3
 
-* ✅ **Est un langage typé**
+* **Est un langage typé**
 
 ### e. Un script écrit en python
 
-* ✅ **Dépend fortement de la version de python avec laquelle il est écrit**
+* **Dépend fortement de la version de python avec laquelle il est écrit**
 
 > Certaines syntaxes et comportements changent selon la version de Python.
 
@@ -40,13 +40,13 @@ Corrigé rédigé à partir du sujet **Examen G40 Python 2025**.
 
 ### a. Les chaines de caractères en Python sont
 
-* ✅ **Immuables et homogènes dans leur contenu**
+* **Immuables et homogènes dans leur contenu**
 
 > Une chaîne est immuable et contient des caractères.
 
 ### b. Soit `ma_liste = [1, 2, 3, 4, 5, 6]`, choisir les deux derniers éléments
 
-* ✅ **`ma_liste[-2:]`**
+* **`ma_liste[-2:]`**
 
 ### c. Soit la liste suivante `ma_liste = [1, 3, 1, 5, 5, 7, 11, 13]`
 
@@ -58,20 +58,20 @@ mon_set = set(ma_liste)
 
 La bonne idée attendue est :
 
-* ✅ **on obtient l’ensemble des valeurs sans doublons**
+* **on obtient l’ensemble des valeurs sans doublons**
 
 > Le sujet propose des réponses sous forme de listes, ce qui est techniquement imprécis : `set(...)` retourne un **ensemble** et non une liste. La réponse la plus proche attendue est donc celle qui élimine les doublons.
 
 ### d. Les annotations dans le langage python permettent
 
-* ✅ **D’enregistrer des définitions des variables**
+* **D’enregistrer des définitions des variables**
 
 > Ici il s’agit des annotations de type, utilisées pour documenter les types attendus.
 
 ### e. Programme avec fonctions / décorateur
 
-* ✅ **`registring <function func1>`**
-* ✅ **`running func1`**
+* **`registring <function func1>`**
+* **`running func1`**
 
 > Le décorateur s’exécute lors de la définition de la fonction, puis la fonction décorée s’exécute ensuite.
 
@@ -81,28 +81,28 @@ La bonne idée attendue est :
 
 ### a. Python est un langage de programmation
 
-* ✅ **Hybride**
+* **Hybride**
 
 ### b. Python permet de déclarer des membres privés dans une classe
 
-* ✅ **En précédant le nom par le symbole `_`**
+* **En précédant le nom par le symbole `_`**
 
 > Plus exactement : `_nom` est une convention de protection, et `__nom` déclenche un name mangling. Python n’a pas de vrai mot-clé `private`.
 
 ### c. Python permet
 
-* ✅ **Un héritage multiple**
+* **Un héritage multiple**
 
 ### d. Pour construire une nouvelle instance d’une classe
 
-* ✅ **On utilise la fonction `__new__`**
-* ✅ **On utilise la fonction `__init__`**
+* **On utilise la fonction `__new__`**
+* **On utilise la fonction `__init__`**
 
 > `__new__` crée l’instance, puis `__init__` l’initialise. Dans beaucoup de cours, on retient surtout `__init__`, mais techniquement les deux interviennent.
 
 ### e. La fonction `__del__`, destructeur d’une classe, permet de
 
-* ✅ **Décrémenter le compteur mémoire de l’objet, c’est le garbage collector qui s’occupera de la destruction de toutes les occurrences**
+* **Décrémenter le compteur mémoire de l’objet, c’est le garbage collector qui s’occupera de la destruction de toutes les occurrences**
 
 > Formulation du sujet un peu approximative, mais l’idée attendue est que `__del__` n’est pas un “delete” direct de toutes les occurrences.
 
@@ -414,5 +414,26 @@ class LeChat(object):
             return self.total_notes / self.nb_notes
 ```
 
+---
+
+## Points importants à retenir pour l’examen
+
+### Sur la partie réseau
+
+* TCP = `socket.AF_INET` + `socket.SOCK_STREAM`
+* `bind()` pour attacher l’adresse
+* `listen()` pour écouter
+* `accept()` pour accepter un client
+* `recv()` pour recevoir
+* `send()` pour envoyer
+
+### Sur la partie threads
+
+Les threads sont utiles ici pour gérer plusieurs clients en parallèle.
+Sans threads, un client bloquerait les autres pendant l’attente de réception.
+
+### Sur la moyenne des notes
+
+Comme plusieurs clients peuvent envoyer des notes en même temps, il faut protéger la mise à jour des variables partagées avec un `Lock`.
 
 
