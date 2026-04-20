@@ -1,389 +1,444 @@
 # Corrigé — Examen G40 Python 2024
 
-## Source
-
-Corrigé rédigé à partir du sujet **Examen G40 Python 2024**.
-
----
-
 ## I. QCM
 
-### 1. Le langage Python
+## 1. Le langage Python
 
-#### a. Le langage python est un langage typé
+### a. Le langage python est un langage
 
-* ✅ **Vrai**
+* **Interprété**
 
-#### b. Un script écrit en python
+### b. Un script écrit en python
 
-* ✅ **Peut ne pas contenir une fonction main**
+* **Peut tourner sur n’importe quelle machine grâce à la machine virtuelle**
 
-#### c. Sur une seule machine on peut
+> Réponse attendue dans l’esprit du cours : le code Python s’exécute via l’interpréteur / machine virtuelle Python disponible sur la machine cible.
 
-* ✅ **Installer plusieurs versions de python**
+### c. PiP est un programme qui permet
 
-#### d. Le programme pip, permet
+* **D’installer et de supprimer des libraries python sur une machine**
 
-* ✅ **De gérer l’installation des paquets python**
+### d. Python dans sa version 3
 
-#### e. Dans python, GIL (Global Interpreter Lock), permet
+* **Est un langage typé**
 
-* ✅ **Protéger les objets pythons lors de l’exécution des threads concurrentiels**
+### e. Un script écrit en python
 
----
+* **Dépend fortement de la version de python avec laquelle il est écrit**
 
-### 2. Structures de données et fonctions
-
-#### a. Une fonction python qui reçoit en paramètre un objet de ce type `**args`
-
-* ✅ **Un dictionnaire**
-
-> Remarque : en pratique on écrit plutôt `**kwargs`.
-
-#### b. `my_str = 'Bonjour'` puis `print(f'{my_str[::-1]}')`
-
-* ✅ **`ruojnoB` est affiché**
-
-#### c. `my_str = '2022'` puis `print(set(my_str))`
-
-* ✅ **`{'0', '2'}` est affiché à l’écran**
-
-> L’ordre peut varier : `{'2', '0'}` est équivalent.
-
-#### d. Une fonction dans python
-
-* ✅ **Est un objet**
-
-#### e. Programme avec décorateur `accept_function`
-
-* ✅ **La fonction `addition` provoque une erreur, la fonction `__addition` est valide**
-
-> Le décorateur vérifie que `fn.__name__.startswith('__')`.
+> Certaines syntaxes et comportements changent selon la version de Python.
 
 ---
 
-### 3. Orienté objet
+## 2. Structures de données et fonctions
 
-#### a. Le type `real` dans python est
+### a. Les chaines de caractères en Python sont
 
-* ✅ **Inexistant**
+* **Immuables et homogènes dans leur contenu**
 
-#### b. Une classe en python
+> Une chaîne est immuable et contient des caractères.
 
-* ✅ **Peut être déclarée sans définir aucune fonction y compris le constructeur**
-* ✅ **Peut ne pas définir un destructeur**
+### b. Soit `ma_liste = [1, 2, 3, 4, 5, 6]`, choisir les deux derniers éléments
 
-#### c. En python, une classe A qui hérite d’une classe B et d’une classe C
+* **`ma_liste[-2:]`**
 
-* ✅ **Se réfère aux classes mères avec leur nom**
+### c. Soit la liste suivante `ma_liste = [1, 3, 1, 5, 5, 7, 11, 13]`
 
-> L’héritage multiple est autorisé, et `super()` existe aussi.
+Avec :
 
-#### d. Classes `A`, `B`, `C(A, B)`
+```python
+mon_set = set(ma_liste)
+```
 
-* ✅ **Rien, le code est valide**
+La bonne idée attendue est :
 
-#### e. Classe `Node` et variables `node_1`, `node_2`, `node_3`
+* **on obtient l’ensemble des valeurs sans doublons**
 
-* ✅ **`1`**
+> Le sujet propose des réponses sous forme de listes, ce qui est techniquement imprécis : `set(...)` retourne un **ensemble** et non une liste. La réponse la plus proche attendue est donc celle qui élimine les doublons.
 
-> `node_3 = node_1` référence le même objet. `del(node_1)` supprime seulement le nom, pas l’objet lui-même.
+### d. Les annotations dans le langage python permettent
+
+* **D’enregistrer des définitions des variables**
+
+> Ici il s’agit des annotations de type, utilisées pour documenter les types attendus.
+
+### e. Programme avec fonctions / décorateur
+
+* **`registring <function func1>`**
+* **`running func1`**
+
+> Le décorateur s’exécute lors de la définition de la fonction, puis la fonction décorée s’exécute ensuite.
+
+---
+
+## 3. Orienté objet
+
+### a. Python est un langage de programmation
+
+* **Hybride**
+
+### b. Python permet de déclarer des membres privés dans une classe
+
+* **En précédant le nom par le symbole `_`**
+
+> Plus exactement : `_nom` est une convention de protection, et `__nom` déclenche un name mangling. Python n’a pas de vrai mot-clé `private`.
+
+### c. Python permet
+
+* **Un héritage multiple**
+
+### d. Pour construire une nouvelle instance d’une classe
+
+* **On utilise la fonction `__new__`**
+* **On utilise la fonction `__init__`**
+
+> `__new__` crée l’instance, puis `__init__` l’initialise. Dans beaucoup de cours, on retient surtout `__init__`, mais techniquement les deux interviennent.
+
+### e. La fonction `__del__`, destructeur d’une classe, permet de
+
+* **Décrémenter le compteur mémoire de l’objet, c’est le garbage collector qui s’occupera de la destruction de toutes les occurrences**
+
+> Formulation du sujet un peu approximative, mais l’idée attendue est que `__del__` n’est pas un “delete” direct de toutes les occurrences.
 
 ---
 
 ## VI. Programmation
 
-## 1. Constructeur de `Game`
-
-L’énoncé demande de sauvegarder les paramètres d’entrée dans les attributs de l’objet.
-
-```python
-class Game(object):
-    def __init__(self, max_gamers, nbr_sticks) -> None:
-        """
-        max_gamers : le nombre maximal de joueurs
-        nbr_sticks : nombre de bâtons dans le jeu
-        """
-        self.max_gamers = max_gamers
-        self.nbr_sticks = nbr_sticks
-```
+L’énoncé demande de développer un serveur assistant IA capable de gérer plusieurs clients TCP, de tokeniser les messages, d’interroger un LLM, puis de calculer une note moyenne d’évaluation.
 
 ---
 
-## 2. Fonction `listen` en pseudo-code
+## 1. Définition de la classe `LeChat`
 
-### Ce qu’il faut ajouter au constructeur
+Le constructeur doit recevoir :
 
-Pour écouter des connexions, il faut aussi prévoir :
+* `max_client`
+* `max_message_len`
+* `ip_address`
+* `port`
 
-* l’adresse du serveur (`host`)
-* le port (`port`)
-* la liste des joueurs connectés
-* éventuellement la socket d’écoute
-
-Exemple :
-
-```python
-class Game(object):
-    def __init__(self, max_gamers, nbr_sticks, host, port) -> None:
-        self.max_gamers = max_gamers
-        self.nbr_sticks = nbr_sticks
-        self.host = host
-        self.port = port
-        self.players = []
-        self.server_socket = None
-```
-
-### Pseudo-code de `listen`
-
-```text
-fonction listen():
-    créer une socket TCP d’écoute
-    associer la socket à (host, port)
-    mettre la socket en mode écoute
-
-    tant que le nombre de joueurs connectés < max_gamers:
-        accepter une nouvelle connexion
-        récupérer la socket de communication du client
-        récupérer l’adresse du client
-        créer un joueur ou enregistrer la socket du joueur
-        ajouter ce joueur dans la liste des joueurs connectés
-
-    quand le nombre maximal est atteint:
-        arrêter l’acceptation de nouvelles connexions
-```
-
-### Version proche de Python
-
-```python
-def listen(self):
-    self.server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    self.server_socket.bind((self.host, self.port))
-    self.server_socket.listen()
-
-    while len(self.players) < self.max_gamers:
-        client_socket, client_addr = self.server_socket.accept()
-        self.players.append((client_socket, client_addr))
-```
-
----
-
-## 3. Méthode `communicate_with_client`
-
-### Énoncé résumé
-
-Le serveur :
-
-1. envoie au joueur : `Choisissez 1, 2 ou 3 bâtonnets à retirer`
-2. lit la réponse
-3. vérifie qu’elle est valide
-4. retire le nombre de bâtonnets demandé
-5. si le joueur n’a pas pris le dernier bâtonnet : envoyer `vous restez dans le jeu`
-6. sinon : envoyer `perdu` au joueur concerné et `gagné` à tous les autres
-
-### Proposition d’implémentation
-
-```python
-def communicate_with_client(self, client_id):
-    send(client_id, "Choisissez 1, 2 ou 3 bâtonnets à retirer")
-    msg = read()
-
-    if not msg.isdigit():
-        send(client_id, "erreur")
-        return
-
-    nb = int(msg)
-
-    if nb < 1 or nb > 3:
-        send(client_id, "erreur")
-        return
-
-    if nb > self.nbr_sticks:
-        send(client_id, "erreur")
-        return
-
-    self.nbr_sticks -= nb
-
-    if self.nbr_sticks > 0:
-        send(client_id, "vous restez dans le jeu")
-    else:
-        send(client_id, "perdu")
-        for other_id in self.players:
-            if other_id != client_id:
-                send(other_id, "gagné")
-```
-
----
-
-## 4. Amélioration : informer les joueurs du nombre de bâtonnets restants
-
-### Modification de `communicate_with_client`
-
-```python
-def communicate_with_client(self, client_id):
-    send(client_id, f"Il reste {self.nbr_sticks} bâtonnets")
-    send(client_id, "Choisissez 1, 2 ou 3 bâtonnets à retirer")
-    msg = read()
-
-    if not msg.isdigit():
-        send(client_id, "erreur")
-        return
-
-    nb = int(msg)
-
-    if nb < 1 or nb > 3:
-        send(client_id, "erreur")
-        return
-
-    if nb > self.nbr_sticks:
-        send(client_id, "erreur")
-        return
-
-    self.nbr_sticks -= nb
-
-    if self.nbr_sticks > 0:
-        for player_id in self.players:
-            send(player_id, f"Il reste {self.nbr_sticks} bâtonnets")
-        send(client_id, "vous restez dans le jeu")
-    else:
-        send(client_id, "perdu")
-        for other_id in self.players:
-            if other_id != client_id:
-                send(other_id, "gagné")
-```
-
-### Où utiliser les threads ?
-
-On utilise les **threads** au niveau de la communication avec les clients.
-
-### Pourquoi ?
-
-Parce que :
-
-* plusieurs joueurs peuvent être connectés en même temps
-* le serveur ne doit pas être bloqué par un seul joueur
-* chaque client peut être géré indépendamment
-
-Un thread par client permet donc de traiter plusieurs communications en parallèle.
-
-### Fonction principale de `Game`
+### Proposition de correction
 
 ```python
 import socket
 import threading
 
-class Game(object):
-    def __init__(self, max_gamers, nbr_sticks, host, port) -> None:
-        self.max_gamers = max_gamers
-        self.nbr_sticks = nbr_sticks
-        self.host = host
+
+class LeChat(object):
+    def __init__(self, max_client, max_message_len, ip_address, port):
+        self.max_client = max_client
+        self.max_message_len = max_message_len
+        self.ip_address = ip_address
         self.port = port
-        self.players = []
+
         self.server_socket = None
+        self.clients = []
+        self.vocab = {}
 
-    def listen(self):
-        self.server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.server_socket.bind((self.host, self.port))
-        self.server_socket.listen()
+        self.total_notes = 0
+        self.nb_notes = 0
+        self.evaluation = 0.0
 
-        while len(self.players) < self.max_gamers:
-            client_socket, client_addr = self.server_socket.accept()
-            self.players.append(client_socket)
-
-    def communicate_with_client(self, client_id):
-        send(client_id, f"Il reste {self.nbr_sticks} bâtonnets")
-        send(client_id, "Choisissez 1, 2 ou 3 bâtonnets à retirer")
-        msg = read()
-
-        if not msg.isdigit():
-            send(client_id, "erreur")
-            return
-
-        nb = int(msg)
-
-        if nb < 1 or nb > 3 or nb > self.nbr_sticks:
-            send(client_id, "erreur")
-            return
-
-        self.nbr_sticks -= nb
-
-        if self.nbr_sticks > 0:
-            for player_id in self.players:
-                send(player_id, f"Il reste {self.nbr_sticks} bâtonnets")
-            send(client_id, "vous restez dans le jeu")
-        else:
-            send(client_id, "perdu")
-            for other_id in self.players:
-                if other_id != client_id:
-                    send(other_id, "gagné")
-
-    def run(self):
-        self.listen()
-
-        threads = []
-        for player in self.players:
-            t = threading.Thread(target=self.communicate_with_client, args=(player,))
-            t.start()
-            threads.append(t)
-
-        for t in threads:
-            t.join()
+        self.lock = threading.Lock()
 ```
 
-> En pratique, il faudrait aussi gérer l’ordre des tours, la synchronisation et l’accès concurrent à `self.nbr_sticks`.
+### Pourquoi ces attributs ?
+
+En plus des paramètres demandés, il faut stocker :
+
+* la socket serveur
+* la liste des clients connectés
+* le vocabulaire si le serveur doit tokeniser
+* les variables de calcul de la moyenne des notes
+* un verrou (`Lock`) pour protéger les accès concurrents
 
 ---
 
-## 5. Passage de TCP à UDP
+## 2. Fonction `manage_connexions`
 
-### Changements à apporter
+L’énoncé demande de gérer des connexions TCP et de faire les modifications nécessaires dans le constructeur. Comme plusieurs clients doivent être gérés, on ouvre une socket serveur, on la met en écoute, puis on accepte les connexions jusqu’à la limite `max_client`.
 
-Avec UDP :
-
-* on crée une socket avec `SOCK_DGRAM`
-* on n’utilise pas `listen()` ni `accept()`
-* on communique avec `sendto()` et `recvfrom()`
-* il faut gérer explicitement l’adresse du client
-
-### Exemple d’adaptation
+### Proposition d’implémentation
 
 ```python
-server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-server_socket.bind((self.host, self.port))
+def manage_connexions(self):
+    self.server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    self.server_socket.bind((self.ip_address, self.port))
+    self.server_socket.listen()
 
-message, client_addr = server_socket.recvfrom(1024)
-server_socket.sendto("message".encode(), client_addr)
+    while len(self.clients) < self.max_client:
+        client_socket, client_address = self.server_socket.accept()
+        self.clients.append(client_socket)
+
+        t = threading.Thread(target=self.handle_client, args=(client_socket,))
+        t.start()
 ```
 
-### Comparatif TCP / UDP
+### Remarque
 
-| Critère                            | TCP                         | UDP                               |
-| ---------------------------------- | --------------------------- | --------------------------------- |
-| Type                               | orienté connexion           | non orienté connexion             |
-| Fiabilité                          | fiable                      | non garantie                      |
-| Ordre des messages                 | garanti                     | non garanti                       |
-| Contrôle d’erreur / retransmission | oui                         | non                               |
-| Vitesse                            | plus lourd                  | plus rapide                       |
-| Usage typique                      | chat, web, transfert fiable | streaming, jeux, voix, temps réel |
+Une autre version acceptable consiste à ne faire ici que l’acceptation des connexions, puis à lancer les threads ailleurs dans une méthode principale.
 
-### Conclusion
+---
 
-Pour ce jeu, **TCP** est plus simple et plus adapté si on veut une communication fiable.
-UDP peut être utilisé, mais il faut gérer soi-même davantage d’éléments : pertes, ordre, suivi des clients.
+## 3. Fonction `tokenizer`
+
+### Ce que demande l’énoncé
+
+La fonction prend :
+
+* un dictionnaire `vocab` dont les clés sont des chaînes de caractères
+* un message contenant plusieurs mots
+
+Elle doit retourner une **liste d’entiers** correspondant aux identifiants des mots du message.
+
+L’énoncé est un peu ambigu sur la signature exacte, car il dit que la fonction prend `vocab` en paramètre mais parle aussi du “message”. La solution la plus logique est de faire une fonction prenant `message` et `vocab`.
+
+### Proposition d’implémentation
+
+```python
+def tokenizer(self, message, vocab):
+    tokens = []
+    mots = message.split()
+
+    for mot in mots:
+        if mot in vocab:
+            tokens.append(vocab[mot])
+
+    return tokens
+```
+
+### Exemple
+
+```python
+vocab = {
+    "bonjour": 1,
+    "comment": 2,
+    "ça": 3,
+    "va": 4
+}
+
+message = "bonjour comment ça va"
+# Résultat : [1, 2, 3, 4]
+```
+
+### Variante acceptable
+
+Si le sujet voulait absolument un seul paramètre explicite `vocab`, on peut supposer que `message` est déjà disponible dans l’objet. Mais la version la plus propre reste celle ci-dessus.
+
+---
+
+## 4. Fonction `handle_client`
+
+### Règles demandées
+
+Dans une boucle infinie, le serveur doit :
+
+1. recevoir un texte avec `recv`
+2. rejeter le message si :
+
+   * il ne finit pas par `?`
+   * sa taille dépasse `max_message_len`
+   * il contient le mot `merci`
+3. si message invalide : envoyer `Texte invalide`
+4. sinon :
+
+   * tokeniser le texte
+   * envoyer la liste d’entiers à `handle_llm`
+   * récupérer une chaîne de caractères en réponse
+   * renvoyer cette réponse au client
+
+### Proposition d’implémentation
+
+```python
+def handle_client(self, client_socket):
+    while True:
+        msg = client_socket.recv(1024).decode()
+
+        if not msg:
+            break
+
+        if (not msg.endswith("?")) or (len(msg) > self.max_message_len) or ("merci" in msg.lower()):
+            client_socket.send("Texte invalide".encode())
+            continue
+
+        tokens = self.tokenizer(msg, self.vocab)
+        response = handle_llm(tokens)
+        client_socket.send(response.encode())
+```
+
+---
+
+## 5. Ajout de l’évaluation instantanée et fonction `get_evaluation`
+
+### Ce que demande l’énoncé
+
+Après chaque réponse envoyée au client, le serveur reçoit une note sur 10.
+Il faut :
+
+* intégrer cette note dans le calcul instantané de la moyenne
+* ajouter une fonction `get_evaluation()` qui renvoie cette moyenne
+
+### Modification de `handle_client`
+
+```python
+def handle_client(self, client_socket):
+    while True:
+        msg = client_socket.recv(1024).decode()
+
+        if not msg:
+            break
+
+        if (not msg.endswith("?")) or (len(msg) > self.max_message_len) or ("merci" in msg.lower()):
+            client_socket.send("Texte invalide".encode())
+            continue
+
+        tokens = self.tokenizer(msg, self.vocab)
+        response = handle_llm(tokens)
+        client_socket.send(response.encode())
+
+        note_msg = client_socket.recv(1024).decode()
+
+        if note_msg.isdigit():
+            note = int(note_msg)
+            if 0 <= note <= 10:
+                with self.lock:
+                    self.total_notes += note
+                    self.nb_notes += 1
+                    self.evaluation = self.total_notes / self.nb_notes
+```
+
+### Fonction `get_evaluation`
+
+```python
+def get_evaluation(self):
+    return self.evaluation
+```
+
+### Variante un peu plus robuste
+
+```python
+def get_evaluation(self):
+    with self.lock:
+        if self.nb_notes == 0:
+            return 0
+        return self.total_notes / self.nb_notes
+```
+
+Cette deuxième version est meilleure, car elle évite de dépendre d’une variable dérivée et gère le cas sans note.
+
+---
+
+## 6. Proposition d’implémentation complète
+
+```python
+import socket
+import threading
+
+
+def handle_llm(tokens):
+    return f"Réponse du LLM pour {tokens}"
+
+
+class LeChat(object):
+    def __init__(self, max_client, max_message_len, ip_address, port):
+        self.max_client = max_client
+        self.max_message_len = max_message_len
+        self.ip_address = ip_address
+        self.port = port
+
+        self.server_socket = None
+        self.clients = []
+        self.vocab = {}
+
+        self.total_notes = 0
+        self.nb_notes = 0
+        self.lock = threading.Lock()
+
+    def manage_connexions(self):
+        self.server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.server_socket.bind((self.ip_address, self.port))
+        self.server_socket.listen()
+
+        while len(self.clients) < self.max_client:
+            client_socket, client_address = self.server_socket.accept()
+            self.clients.append(client_socket)
+
+            t = threading.Thread(target=self.handle_client, args=(client_socket,))
+            t.start()
+
+    def tokenizer(self, message, vocab):
+        tokens = []
+        mots = message.split()
+
+        for mot in mots:
+            if mot in vocab:
+                tokens.append(vocab[mot])
+
+        return tokens
+
+    def handle_client(self, client_socket):
+        while True:
+            msg = client_socket.recv(1024).decode()
+
+            if not msg:
+                break
+
+            if (not msg.endswith("?")) or (len(msg) > self.max_message_len) or ("merci" in msg.lower()):
+                client_socket.send("Texte invalide".encode())
+                continue
+
+            tokens = self.tokenizer(msg, self.vocab)
+            response = handle_llm(tokens)
+            client_socket.send(response.encode())
+
+            note_msg = client_socket.recv(1024).decode()
+            if note_msg.isdigit():
+                note = int(note_msg)
+                if 0 <= note <= 10:
+                    with self.lock:
+                        self.total_notes += note
+                        self.nb_notes += 1
+
+        client_socket.close()
+
+    def get_evaluation(self):
+        with self.lock:
+            if self.nb_notes == 0:
+                return 0
+            return self.total_notes / self.nb_notes
+```
+
+---
+
+## Points importants à retenir pour l’examen
+
+### Sur la partie réseau
+
+* TCP = `socket.AF_INET` + `socket.SOCK_STREAM`
+* `bind()` pour attacher l’adresse
+* `listen()` pour écouter
+* `accept()` pour accepter un client
+* `recv()` pour recevoir
+* `send()` pour envoyer
+
+### Sur la partie threads
+
+Les threads sont utiles ici pour gérer plusieurs clients en parallèle.
+Sans threads, un client bloquerait les autres pendant l’attente de réception.
+
+### Sur la moyenne des notes
+
+Comme plusieurs clients peuvent envoyer des notes en même temps, il faut protéger la mise à jour des variables partagées avec un `Lock`.
 
 ---
 
 ## Remarques finales
 
-Ce corrigé propose une **solution raisonnable d’examen** :
+Ce corrigé est une **proposition solide et cohérente** à partir du sujet.
+Quelques formulations de l’énoncé sont imprécises, notamment :
 
-* correcte sur le plan Python
-* cohérente avec l’énoncé
-* suffisamment claire pour une rédaction sur copie
+* la question sur `set(...)`, qui parle de listes alors que Python retourne un ensemble
+* la signature exacte de `tokenizer`
+* la question sur `__new__` / `__init__`, où les deux jouent un rôle mais selon le niveau du cours, une seule réponse peut parfois être attendue
 
-Pour une vraie application réseau complète, il faudrait en plus :
-
-* gérer précisément les tours de jeu
-* protéger `nbr_sticks` avec synchronisation (`Lock`)
-* identifier clairement chaque joueur
-* gérer les déconnexions et erreurs réseau
+Dans un contexte d’examen, cette rédaction donne une réponse techniquement correcte et défendable.
